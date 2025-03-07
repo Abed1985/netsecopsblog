@@ -1,0 +1,4 @@
+[submodule "netsecopsblog_site/public"]
+	path = netsecopsblog_site/public
+	url = https://github.com/Abed1985/abed1985.github.io
+	branch = main
