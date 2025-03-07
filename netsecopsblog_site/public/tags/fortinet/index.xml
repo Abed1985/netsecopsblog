@@ -6,10 +6,21 @@
     <description>Recent content in fortinet on NetSecOps Navigator</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 06 Mar 2025 04:32:54 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 07 Mar 2025 01:45:48 +0000</lastBuildDate>
     
 	<atom:link href="https://abed1985.github.io/tags/fortinet/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Fortinet ZTNA Part III</title>
+      <link>https://abed1985.github.io/blogs/fortinet-ztna-part3/</link>
+      <pubDate>Fri, 07 Mar 2025 01:45:48 +0000</pubDate>
+      
+      <guid>https://abed1985.github.io/blogs/fortinet-ztna-part3/</guid>
+      <description>In this third installment of our Fortinet ZTNA series, we explore integrating SAML authentication with Microsoft Azure as the Identity Provider (IdP) and FortiGate as the Service Provider (SP). By leveraging SAML, authentication is offloaded from the access proxy to the IdP, allowing organizations to enforce advanced authentication policies such as Multi-Factor Authentication (MFA)
+To learn more about SAML authentication, check out my by blog post: SAML Authentication
+Configuring a SAML Application (IdP) on Microsoft Azure Step 1: Create an Enterprise Application  Log in to the Azure Administration Console under your customer tenant.</description>
+    </item>
     
     <item>
       <title>Fortinet ZTNA Part II</title>
