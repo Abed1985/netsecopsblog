@@ -18,7 +18,8 @@ DLP (Data Leak Prevention) has become increasingly crucial with the rise of LLM 
 
 While this convenience is beneficial, it also raises the risk of unintentionally exposing sensitive organizational information. LLM models can incorporate leaked data into their training sets, potentially making it part of responses to external users—significantly increasing security risks.
 
-A notable example is the Samsung data leak to ChatGPT: https://www.forbes.com/sites/siladityaray/2023/05/02/samsung-bans-chatgpt-and-other-chatbots-for-employees-after-sensitive-code-leak/
+A notable example is the Samsung data leak to ChatGPT: 
+To learn more about this data leak, check:[Samsung Bans ChatGpT for employees after Sesitive Code leak](https://www.forbes.com/sites/siladityaray/2023/05/02/samsung-bans-chatgpt-and-other-chatbots-for-employees-after-sensitive-code-leak/)
 
 A comprehensive DLP solution can effectively address these challenges. But what if a customer has a FortiGate firewall and wants to leverage its DLP capabilities to mitigate these risks?
 
@@ -196,9 +197,9 @@ Create A firewall policy referencing the following:
 
 The policy inspection type need to be proxy based , and using deep inspection.
 
-![My Image](/images/fortinet/dlp_fwp.png)
-
-
+![My Image](/images/fortinet/dlp_fwp.PNG)
+<br>
+<br>
 ### Step 7: Testing
 
 Lets now visit the website and attempt leaking information. Note that the "Fortinet" CA SSL certificate present itself for deep inspection.

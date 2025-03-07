@@ -1,7 +1,7 @@
 ---
 title: "Fortinet ZTNA Part III"
 date: 2025-03-07T01:45:48Z
-draft: true
+draft: false
 github_link: "https://github.com/abed1985"
 author: "Abood Alakhras"
 tags:

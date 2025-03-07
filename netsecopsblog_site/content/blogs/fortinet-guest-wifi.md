@@ -128,7 +128,7 @@ The logo along with the portal "Login Page" can be tailored by modifying the HTM
 ![My Image](/images/fortinet/customize_logo_login.PNG)
 
 The rest of the HTML pages can be tailored in the same approach. 
-The changes are dynamic and visible while you edit. You don't have to be a web developer to do minor changes to tailor your login page :) 
+The changes are dynamic and visible while you edit. You don't have to be a web developer to do minor changes to tailor your login page 😀 
 
 ### Resolve the Guest Portal Address
 
