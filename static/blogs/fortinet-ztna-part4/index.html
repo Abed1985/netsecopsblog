@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta http-equiv="Accept-CH" content="DPR, Viewport-Width, Width">
+<link rel="icon" href=/netsecnavigator_favicon_32x32.png type="image/gif">
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Alata&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+>
+<link rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Alata&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+      media="print" onload="this.media='all'" />
+<noscript>
+  <link
+          href="https://fonts.googleapis.com/css2?family=Alata&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+          rel="stylesheet">
+</noscript>
+
+
+<link rel="stylesheet" href="/css/font.css" media="all">
+
+
+
+<meta property="og:title" content="Fortinet Ztna Part IV" />
+<meta property="og:description" content="ZTNA Access Proxy Server Types" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://abed1985.github.io/blogs/fortinet-ztna-part4/" />
+<meta property="article:published_time" content="2025-03-08T06:46:32+00:00" />
+<meta property="article:modified_time" content="2025-03-08T06:46:32+00:00" /><meta property="og:site_name" content="NetSecOps Navigator" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Fortinet Ztna Part IV"/>
+<meta name="twitter:description" content="ZTNA Access Proxy Server Types"/>
+
+
+<link rel="stylesheet" href="/bootstrap-5/css/bootstrap.min.css" media="all"><link rel="stylesheet" href="/css/header.css" media="all">
+<link rel="stylesheet" href="/css/footer.css" media="all">
+
+
+<link rel="stylesheet" href="/css/theme.css" media="all">
+
+<style>
+    :root {
+        --text-color: #343a40;
+        --text-secondary-color: #6c757d;
+        --text-link-color: #007bff;
+        --background-color: #eaedf0;
+        --secondary-background-color: #64ffda1a;
+        --primary-color: #007bff;
+        --secondary-color: #f8f9fa;
+
+         
+        --text-color-dark: #e4e6eb;
+        --text-secondary-color-dark: #b0b3b8;
+        --text-link-color-dark: #ffffff;
+        --background-color-dark: #18191a;
+        --secondary-background-color-dark: #212529;
+        --primary-color-dark: #ffffff;
+        --secondary-color-dark: #212529;
+    }
+    body {
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.5;
+        text-align: left;
+    }
+
+    html {
+        background-color: var(--background-color) !important;
+    }
+
+    body::-webkit-scrollbar {
+        height: 0px;
+        width: 8px;
+        background-color: var(--background-color);
+    }
+
+    ::-webkit-scrollbar-track {
+        border-radius: 1rem;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        border-radius: 1rem;
+        background: #b0b0b0;
+        outline: 1px solid var(--background-color);
+    }
+
+    #search-content::-webkit-scrollbar {
+        width: .5em;
+        height: .1em;
+        background-color: var(--background-color);
+    }
+</style>
+
+
+
+<meta name="description" content="ZTNA Access Proxy Server Types">
+<link rel="stylesheet" href="/css/single.css">
+
+
+<script defer src="/fontawesome-6/all-6.4.2.js"></script>
+
+
+  
+  
+
+  <title>
+Fortinet Ztna Part IV | NetSecOps Navigator
+
+  </title>
+</head>
+
+<body class="light">
+  
+  
+<script>
+    let localStorageValue = localStorage.getItem("pref-theme");
+    let mediaQuery = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+    switch (localStorageValue) {
+        case "dark":
+            document.body.classList.add('dark');
+            break;
+        case "light":
+            document.body.classList.remove('dark');
+            break;
+        default:
+            if (mediaQuery) {
+                document.body.classList.add('dark');
+            }
+            break;
+    }
+</script>
+
+
+
+
+<script>
+    var prevScrollPos = window.pageYOffset;
+    window.addEventListener("scroll", function showHeaderOnScroll() {
+        let profileHeaderElem = document.getElementById("profileHeader");
+        let currentScrollPos = window.pageYOffset;
+        let resetHeaderStyle = false;
+        let showNavBarOnScrollUp =  true ;
+        let showNavBar = showNavBarOnScrollUp ? prevScrollPos > currentScrollPos : currentScrollPos > 0;
+        if (showNavBar) {
+            profileHeaderElem.classList.add("showHeaderOnTop");
+        } else {
+            resetHeaderStyle = true;
+        }
+        if(currentScrollPos === 0) {
+            resetHeaderStyle = true;
+        }
+        if(resetHeaderStyle) {
+            profileHeaderElem.classList.remove("showHeaderOnTop");
+        }
+        prevScrollPos = currentScrollPos;
+    });
+</script>
+
+
+
+<header id="profileHeader">
+    <nav class="pt-3 navbar navbar-expand-lg animate">
+        <div class="container-fluid mx-xs-2 mx-sm-5 mx-md-5 mx-lg-5">
+            
+            <a class="navbar-brand primary-font text-wrap" href="/">
+                
+                <img src="/netsecnavigator_favicon_32x32.png" width="30" height="30"
+                    class="d-inline-block align-top">
+                NetSecOps Navigator
+                
+            </a>
+
+            
+                <div>
+                    <input id="search" autocomplete="off" class="form-control mr-sm-2 d-none d-md-block" placeholder='Ctrl &#43; k to Search...'
+                        aria-label="Search" oninput="searchOnChange(event)">
+                </div>
+            
+
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
+                aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+                <svg aria-hidden="true" height="24" viewBox="0 0 16 16" version="1.1" width="24" data-view-component="true">
+                    <path fill-rule="evenodd" d="M1 2.75A.75.75 0 011.75 2h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 2.75zm0 5A.75.75 0 011.75 7h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 7.75zM1.75 12a.75.75 0 100 1.5h12.5a.75.75 0 100-1.5H1.75z"></path>
+                </svg>
+            </button>
+
+            
+            <div class="collapse navbar-collapse text-wrap primary-font" id="navbarContent">
+                <ul class="navbar-nav ms-auto text-center">
+                    
+                        <li class="nav-item navbar-text d-block d-md-none">
+                            <div class="nav-link">
+                                <input id="search" autocomplete="off" class="form-control mr-sm-2" placeholder='Ctrl &#43; k to Search...' aria-label="Search" oninput="searchOnChange(event)">
+                            </div>
+                        </li>
+                    
+
+                    
+                    <li class="nav-item navbar-text">
+                        <a class="nav-link" href="/#about" aria-label="about">
+                            About Me
+                        </a>
+                    </li>
+                    
+
+                    
+                    <li class="nav-item navbar-text">
+                        <a class="nav-link" href="/#experience"
+                            aria-label="experience">
+                            Experience
+                        </a>
+                    </li>
+                    
+
+                    
+
+                    
+
+                    
+
+                    
+                    <li class="nav-item navbar-text">
+                        <a class="nav-link" href="/#contact"
+                            aria-label="contact">
+                            Contact
+                        </a>
+                    </li>
+                    
+
+                    
+
+                    
+                    
+                    
+                    
+                    <li class="nav-item navbar-text">
+                        <a class="nav-link" href="/blogs" title="Blog posts">
+                            
+                            Blog
+                        </a>
+                    </li>
+                    
+                    
+
+                    
+                    <li class="nav-item navbar-text">
+                        
+                        <div class="text-center">
+                            <button id="theme-toggle">
+                                <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                                </svg>
+                                <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="5"></circle>
+                                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                                </svg>
+                            </button>
+                        </div>
+                    </li>
+                    
+
+                </ul>
+
+            </div>
+        </div>
+    </nav>
+</header>
+<div id="content">
+<section id="single">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-sm-12 col-md-12 col-lg-9">
+        <div class="pr-lg-4">
+          <div class="title mb-5">
+            <h1 class="text-center mb-4">Fortinet Ztna Part IV</h1>
+            <div class="text-center">
+              
+                Abood Alakhras
+                <small>|</small>
+              
+              Mar 8, 2025
+
+              
+              <span id="readingTime">
+                min read
+              </span>
+              
+            </div>
+          </div>
+          
+          <div class="featured-image">
+            <img class="img-fluid mx-auto d-block" src="/images/fortinet/ztnap.png" alt="Fortinet Ztna Part IV">
+          </div>
+          
+          <article class="page-content  p-2">
+          <h2 id="introduction">Introduction</h2>
+<p>In this fourth installment of our Fortinet ZTNA series, we delve into ZTNA access proxy server types and how each is applied in our Proof of Concept (PoC).</p>
+<p>The ZTNA server defines the access proxy VIP and the real servers that clients connect to. Once configured, client requests are redirected to the access proxy VIP, with authentication mechanisms such as SAML layered on top.</p>
+<p>ZTNA supports multiple HTTP and SAML authentication methods.</p>
+<h2 id="poc-scenario">PoC Scenario</h2>
+<p>In our PoC, we need to grant access to:</p>
+<pre><code>Two web servers via HTTPS (TCP 443)
+One RDP server via TCP 3389
+One SSH server via TCP 22
+</code></pre>
+<p>To achieve this, we configure three types of ZTNA proxies:</p>
+<h3 id="ztna-https-access-proxy">ZTNA HTTPS Access Proxy</h3>
+<p>The FortiGate HTTPS access proxy functions as a reverse proxy for web servers, forwarding client connections while enforcing authentication and security policies.</p>
+<h4 id="how-it-works">How It Works:</h4>
+<ul>
+<li>The web server address resolves to the FortiGate access proxy VIP.</li>
+<li>FortiGate proxies the connection, authenticates the device, and enforces security policies.</li>
+<li>The user is prompted to present an endpoint certificate, validated against FortiClient EMS.</li>
+</ul>
+<h4 id="configuration-example">Configuration Example</h4>
+<p>For our PoC, we use FortiGate proxy VIPs:</p>
+<ul>
+<li>aboodshouse.fortiddns.com:8443</li>
+<li>aboodshouse.fortiddns.com:9443</li>
+</ul>
+<p>The equivalent CLI configuration for two web servers:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">config firewall access<span style="color:#f92672">-</span>proxy
+    edit <span style="color:#e6db74">&#34;ABOOD-DC&#34;</span>
+        set vip <span style="color:#e6db74">&#34;ABOOD-DC&#34;</span>
+        set client<span style="color:#f92672">-</span>cert enable
+        config api<span style="color:#f92672">-</span>gateway
+            edit <span style="color:#ae81ff">1</span>
+                config realservers
+                    edit <span style="color:#ae81ff">1</span>
+                        set ip <span style="color:#ae81ff">192.168</span><span style="color:#f92672">.</span><span style="color:#ae81ff">5.100</span>
+                    next
+                end
+            next
+        end
+    next
+end
+FG<span style="color:#f92672">-</span>ABOOD<span style="color:#f92672">-</span>DC<span style="color:#f92672">-</span>WAN (ABOOD<span style="color:#f92672">-</span>DC) <span style="color:#75715e"># next</span>
+FG<span style="color:#f92672">-</span>ABOOD<span style="color:#f92672">-</span>DC<span style="color:#f92672">-</span>WAN (access<span style="color:#f92672">-</span>proxy) <span style="color:#75715e"># edit ABOOD-DC2 </span>
+FG<span style="color:#f92672">-</span>ABOOD<span style="color:#f92672">-</span>DC<span style="color:#f92672">-</span>WAN (ABOOD<span style="color:#f92672">-</span>DC2) <span style="color:#75715e"># show</span>
+config firewall access<span style="color:#f92672">-</span>proxy
+    edit <span style="color:#e6db74">&#34;ABOOD-DC2&#34;</span>
+        set vip <span style="color:#e6db74">&#34;ABOOD-DC2&#34;</span>
+        set client<span style="color:#f92672">-</span>cert enable
+        config api<span style="color:#f92672">-</span>gateway
+            edit <span style="color:#ae81ff">3</span>
+                config realservers
+                    edit <span style="color:#ae81ff">1</span>
+                        set ip <span style="color:#ae81ff">192.168</span><span style="color:#f92672">.</span><span style="color:#ae81ff">2.222</span>
+                    next
+                end
+            next
+            edit <span style="color:#ae81ff">2</span>
+                set service samlsp
+                set saml<span style="color:#f92672">-</span>server <span style="color:#e6db74">&#34;azure-saml&#34;</span>
+            next
+        end
+    next
+end
+FG<span style="color:#f92672">-</span>ABOOD<span style="color:#f92672">-</span>DC<span style="color:#f92672">-</span>WAN (ABOOD<span style="color:#f92672">-</span>DC2) <span style="color:#75715e"># end</span>
+</code></pre></div><h4 id="key-notes">Key notes</h4>
+<ul>
+<li>The certificate &ldquo;aboodfwcert&rdquo; is issued by a trusted CA and used for the access proxy.</li>
+<li>The second web server requires SAML authentication, adding an extra layer of security.</li>
+</ul>
+<h3 id="ztna-tcp-forwarding-access-proxy">ZTNA TCP Forwarding Access Proxy</h3>
+<p>The FortiGate TCP forwarding access proxy enables secure tunneling of TCP-based protocols such as RDP, FTP, and SMB.</p>
+<h4 id="how-it-works-1">How It Works:</h4>
+<ul>
+<li>The proxy forwards TCP traffic to the target server.</li>
+<li>The connection is tunneled over HTTPS between the client and FortiGate.</li>
+<li>FortiGate enforces user and device authentication before granting access.</li>
+<li>Additional security posture checks (LDAP, RADIUS, SAML) can be applied.</li>
+</ul>
+<h4 id="configuration-example-1">Configuration Example</h4>
+<p>For our PoC, we configure one RDP server (TCP 3389) via the FortiGate proxy VIP aboodshouse.fortiddns.com:7443 :</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">config firewall access<span style="color:#f92672">-</span>proxy
+    edit <span style="color:#e6db74">&#34;ABOOD-DC3&#34;</span>
+        set vip <span style="color:#e6db74">&#34;ABOOD-DC3&#34;</span>
+        set client<span style="color:#f92672">-</span>cert enable
+        config api<span style="color:#f92672">-</span>gateway
+            edit <span style="color:#ae81ff">1</span>
+                set url<span style="color:#f92672">-</span>map <span style="color:#e6db74">&#34;/tcp&#34;</span>
+                set service tcp<span style="color:#f92672">-</span>forwarding
+                config realservers
+                    edit <span style="color:#ae81ff">1</span>
+                        set address <span style="color:#e6db74">&#34;Windows_Server&#34;</span>
+                        set mappedport <span style="color:#ae81ff">3389</span> 
+                    next
+                end
+            next
+            edit <span style="color:#ae81ff">2</span>
+                set service samlsp
+                set saml<span style="color:#f92672">-</span>server <span style="color:#e6db74">&#34;azure-saml&#34;</span>
+            next
+        end
+    next
+end
+</code></pre></div><h3 id="ztna-ssh-access-proxy">ZTNA SSH Access Proxy:</h3>
+<p>The FortiGate SSH access proxy secures and controls access to SSH servers.</p>
+<h4 id="how-it-works-2">How It Works:</h4>
+<ul>
+<li>FortiGate acts as a reverse proxy for SSH traffic.</li>
+<li>It validates the SSH host key to verify the server’s identity.</li>
+<li>If the host key matches, the connection is established. Otherwise, it is denied.</li>
+</ul>
+<h4 id="advantages-over-tcp-forwarding">Advantages Over TCP Forwarding:</h4>
+<ul>
+<li>Enables SSH deep inspection.</li>
+<li>Performs optional host key validation.</li>
+<li>Enforces user and device trust context.</li>
+<li>Supports one-time authentication for both FortiGate and the SSH server.</li>
+</ul>
+<h4 id="configuration-steps">Configuration Steps</h4>
+<p>For our PoC, we configure one server access over SSH (TCP 22) via the FortiGate proxy VIP aboodshouse.fortiddns.com:6443 :</p>
+<ol>
+<li>Locate the public key files in the SSH server: Choose the public key file based on the hash type ( in this case, ECDSA) , and show its content with cat utility</li>
+</ol>
+<p><img src="/images/fortinet/ztna_ssh1.PNG" alt="My Image"></p>
+<ol start="2">
+<li>Retrieve the Fortigate CA&rsquo;s public key from the Fortigate:</li>
+</ol>
+<p><img src="/images/fortinet/ztna_ssh2.PNG" alt="My Image"></p>
+<ol start="3">
+<li>On the Linux server, enable the SSH service to use the authorized_keys file:
+<ul>
+<li>Locate and edit  /etc/ssh/sshd_config file.</li>
+<li>Ensure that the AuthorizedKeysFile line is not commented.</li>
+</ul>
+</li>
+</ol>
+<p><img src="/images/fortinet/ztna_ssh4.PNG" alt="My Image"></p>
+<ol start="4">
+<li>Allow remote SSH log in with certificate authentication and principal name:
+<ul>
+<li>Locate the accounts authorized_keys file in the ~/.ssh directory ( if the directory doesnt exist, create it with mkdir ~/.ssh)</li>
+<li>Create an entry containing following keywards and add them the authorized_keys file . In POC example ( using echo &lsquo;cert-authority,principals=&quot;abooda&rdquo; ssh-rsa ********&rsquo; &raquo; authorized_keys)
+-&gt; cert-authority: Indicates entry us used in certificate authentication by validating the certificate using the public key provided in this entry.
+-&gt; principals=&quot;abood&rdquo; : indicates the user that must match with the username embedded in the SSH certificate.
+-&gt; ssh-rsa **** : indicates the Fortigates CA&rsquo;s public key that is used to validate the SSH certificate</li>
+</ul>
+</li>
+</ol>
+<p><img src="/images/fortinet/ztna_ssh5.PNG" alt="My Image"></p>
+<p><img src="/images/fortinet/ztna_ssh6.PNG" alt="My Image"></p>
+<ol start="5">
+<li>Restart sshd service per above.
+<ul>
+<li>When a user connects from a SSH client using <username>@<server IP>, sshd will locate the authorized_keys file in the directory /home/<username>/.ssh/authorized_keys.</li>
+<li>If the authorized_keys is not in that directory, authentication will fail on the SSH server side.</li>
+<li>If you suspect that authentication is failing on the SSH server, use the following commands to manually start sshd in debug mode to troubleshoot:</li>
+</ul>
+</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ sudo systemctl stop sshd
+$ /usr/sbin/sshd -ddd -p <span style="color:#ae81ff">22</span>
+</code></pre></div><ol start="6">
+<li>Create a new VIP on Fortigate to allow access to the SSH proxy ( In POC: aboodshouse.fortiddns.com:6443)</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">config firewall vip
+    edit <span style="color:#e6db74">&#34;ABOOD-DC4&#34;</span>
+        set type access<span style="color:#f92672">-</span>proxy
+        set extip <span style="color:#ae81ff">14.137</span><span style="color:#f92672">.</span><span style="color:#ae81ff">208.29</span>
+        set extintf <span style="color:#e6db74">&#34;NBN&#34;</span>
+        set server<span style="color:#f92672">-</span>type https
+        set extport <span style="color:#ae81ff">6443</span>
+        set ssl<span style="color:#f92672">-</span>certificate <span style="color:#e6db74">&#34;aboodfwcert&#34;</span>
+    next
+end
+</code></pre></div><ol start="7">
+<li>Create the address object of the SSH server on the Fortigate Firewall:</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">config firewall address
+    edit <span style="color:#e6db74">&#34;ubuntu-docker-2&#34;</span>
+        set subnet <span style="color:#ae81ff">192.168</span><span style="color:#f92672">.</span><span style="color:#ae81ff">2.3</span> <span style="color:#ae81ff">255.255</span><span style="color:#f92672">.</span><span style="color:#ae81ff">255.255</span>
+    next
+end
+</code></pre></div><ol start="8">
+<li>Configure the host-key that will be used to authenticate the SSH server. The public key was retrieved when we configured the Linux SSH server ( Step 1).</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">config firewall ssh host<span style="color:#f92672">-</span>key
+    edit <span style="color:#e6db74">&#34;spk-ubuntu-docker-2&#34;</span>
+        set type ECDSA
+        set usage access<span style="color:#f92672">-</span>proxy
+        set public<span style="color:#f92672">-</span>key <span style="color:#e6db74">&#34;AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBBBooCYd+9j47rfY8lFYOqrztZPL8pvpHQRAWmOHa2kjuq8wCcJRiWq3MQxGXKjWsVWxCHVY5HLaMEyd1FySVG4=&#34;</span>
+    next
+end
+
+<span style="color:#ae81ff">9.</span>	 Configure the access proxy SSH client certificate ( A CA certificate <span style="color:#f92672">is</span> assigned to sign the SSH certificate that will be used <span style="color:#f92672">in</span> the SSH authentication<span style="color:#f92672">.</span> The SSH certificate will have the username embedded <span style="color:#f92672">in</span> the certificate principal)<span style="color:#f92672">.</span> 
+config firewall access<span style="color:#f92672">-</span>proxy<span style="color:#f92672">-</span>ssh<span style="color:#f92672">-</span>client<span style="color:#f92672">-</span>cert
+    edit <span style="color:#e6db74">&#34;ubuntu-docker-2-access-proxy-ssh-client-cert&#34;</span>
+        set source<span style="color:#f92672">-</span>address enable
+        set auth<span style="color:#f92672">-</span>ca <span style="color:#e6db74">&#34;Fortinet_SSH_CA&#34;</span>
+    next
+end
+</code></pre></div><ol start="10">
+<li>Configure the access proxy server settings:</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">config firewall access<span style="color:#f92672">-</span>proxy
+    edit <span style="color:#e6db74">&#34;ABOOD-DC4&#34;</span>
+        set vip <span style="color:#e6db74">&#34;ABOOD-DC4&#34;</span>
+        set client<span style="color:#f92672">-</span>cert enable
+        config api<span style="color:#f92672">-</span>gateway
+            edit <span style="color:#ae81ff">1</span>
+                set url<span style="color:#f92672">-</span>map <span style="color:#e6db74">&#34;/tcp&#34;</span>
+                set service tcp<span style="color:#f92672">-</span>forwarding
+                config realservers
+                    edit <span style="color:#ae81ff">1</span>
+                        set address <span style="color:#e6db74">&#34;ubuntu-docker-2&#34;</span>
+                        set type ssh
+                        set ssh<span style="color:#f92672">-</span>client<span style="color:#f92672">-</span>cert <span style="color:#e6db74">&#34;ubuntu-docker-2-access-proxy-ssh-client-cert&#34;</span>
+                        set ssh<span style="color:#f92672">-</span>host<span style="color:#f92672">-</span>key<span style="color:#f92672">-</span>validation enable
+                        set ssh<span style="color:#f92672">-</span>host<span style="color:#f92672">-</span>key <span style="color:#e6db74">&#34;spk-ubuntu-docker-2&#34;</span>
+                    next
+                end
+            next
+            edit <span style="color:#ae81ff">2</span>
+                set service samlsp
+                set saml<span style="color:#f92672">-</span>server <span style="color:#e6db74">&#34;azure-saml&#34;</span>
+            next
+        end
+    next
+end
+</code></pre></div><h2 id="conclusion">Conclusion</h2>
+<p>ZTNA access proxies provide a flexible and secure method for controlling access to protected resources. By leveraging HTTPS, TCP forwarding, and SSH access proxies, organizations can:</p>
+<ul>
+<li>Ensure strong authentication and identity validation.</li>
+<li>Secure access to web, RDP, and SSH services.</li>
+<li>Maintain zero-trust security principles.</li>
+</ul>
+
+          </article>
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-12 col-lg-3">
+        <div id="stickySideBar" class="sticky-sidebar">
+          
+          <aside class="toc">
+              <h5>
+                Table Of Contents
+              </h5>
+              <div class="toc-content">
+                <nav id="TableOfContents">
+  <ul>
+    <li><a href="#introduction">Introduction</a></li>
+    <li><a href="#poc-scenario">PoC Scenario</a>
+      <ul>
+        <li><a href="#ztna-https-access-proxy">ZTNA HTTPS Access Proxy</a></li>
+        <li><a href="#ztna-tcp-forwarding-access-proxy">ZTNA TCP Forwarding Access Proxy</a></li>
+        <li><a href="#ztna-ssh-access-proxy">ZTNA SSH Access Proxy:</a></li>
+      </ul>
+    </li>
+    <li><a href="#conclusion">Conclusion</a></li>
+  </ul>
+</nav>
+              </div>
+          </aside>
+          
+
+          
+          <aside class="tags">
+            <h5>Tags</h5>
+            <ul class="tags-ul list-unstyled list-inline">
+              
+              <li class="list-inline-item"><a href="https://abed1985.github.io/tags/security"
+                target="_blank"
+              >security</a></li>
+              
+              <li class="list-inline-item"><a href="https://abed1985.github.io/tags/fortinet"
+                target="_blank"
+              >fortinet</a></li>
+              
+              <li class="list-inline-item"><a href="https://abed1985.github.io/tags/zerotrust"
+                target="_blank"
+              >zerotrust</a></li>
+              
+            </ul>
+          </aside>
+          
+
+          
+          <aside class="social">
+            <h5>Social</h5>
+            <div class="social-content">
+              <ul class="list-inline">
+                <li class="list-inline-item text-center">
+                  <a target="_blank" href="https://www.linkedin.com/shareArticle?mini=true&url=https%3a%2f%2fabed1985.github.io%2fblogs%2ffortinet-ztna-part4%2f">
+                    <i class="fab fa-linkedin"></i>
+                  </a>
+                </li>
+                <li class="list-inline-item text-center">
+                  <a target="_blank" href="https://twitter.com/share?text=Fortinet%20Ztna%20Part%20IV&url=https%3a%2f%2fabed1985.github.io%2fblogs%2ffortinet-ztna-part4%2f">
+                    <i class="fab fa-twitter"></i>
+                  </a>
+                </li>
+                <li class="list-inline-item text-center">
+                  <a target="_blank" href="https://api.whatsapp.com/send?text=Fortinet%20Ztna%20Part%20IV: https%3a%2f%2fabed1985.github.io%2fblogs%2ffortinet-ztna-part4%2f">
+                    <i class="fab fa-whatsapp"></i>
+                  </a>
+                </li>
+                <li class="list-inline-item text-center">
+                  <a target="_blank" href='mailto:?subject=Fortinet%20Ztna%20Part%20IV&amp;body=Check%20out%20this%20site https%3a%2f%2fabed1985.github.io%2fblogs%2ffortinet-ztna-part4%2f'>
+                    <i class="fa fa-envelope"></i>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </aside>
+          
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12 col-md-12 col-lg-9 p-4">
+        
+      </div>
+    </div>
+  </div>
+  <button class="p-2 px-3" onclick="topFunction()" id="topScroll">
+    <i class="fas fa-angle-up"></i>
+  </button>
+</section>
+
+
+<div class="progress">
+  <div id="scroll-progress-bar" class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+</div>
+<Script src="/js/scrollProgressBar.js"></script>
+
+
+<script>
+  var topScroll = document.getElementById("topScroll");
+  window.onscroll = function() {scrollFunction()};
+
+  function scrollFunction() {
+    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+      topScroll.style.display = "block";
+    } else {
+      topScroll.style.display = "none";
+    }
+  }
+
+  function topFunction() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  }
+
+  
+  let stickySideBarElem = document.getElementById("stickySideBar");
+  let stickyNavBar =  true ;
+  if(stickyNavBar) {
+    let headerElem = document.getElementById("profileHeader");
+    let headerHeight = headerElem.offsetHeight + 15;
+    stickySideBarElem.style.top = headerHeight + "px";
+  } else {
+    stickySideBarElem.style.top = "50px";
+  }
+</script>
+
+
+<script src="/js/readingTime.js"></script>
+
+
+
+  </div><footer>
+    
+ 
+ 
+<div class="container py-3" id="recent-posts">
+    
+    
+    <div class="h3 text-center text-secondary py-3">
+        Recent Posts
+    </div>
+    <div class="row justify-content-center">
+        
+        <div class="col-lg-4 col-md-6 pt-2">
+            <div class="card h-100">
+                
+                <div class="card-header">
+                    <a href="/blogs/fortinet-ztna-part4/">
+                        <img src="/images/fortinet/ztnap.png" class="card-img-top" alt="Fortinet Ztna Part IV">
+                    </a>
+                </div>
+                
+                <div class="card-body bg-transparent p-3 shadow-sm">
+                    <a href="/blogs/fortinet-ztna-part4/" class="primary-font card-title">
+                        <h5 class="card-title bg-transparent" title="Fortinet Ztna Part IV">Fortinet Ztna Part IV</h5>
+                    </a>
+                    <div class="card-text secondary-font">
+                        <p>Introduction In this fourth installment of our Fortinet ZTNA series, we delve into ZTNA access proxy server types and how each is applied in our Proof of Concept (PoC).
+The ZTNA server defines the access proxy VIP and the real servers that clients connect to. Once configured, client requests are …</p>
+                    </div>
+                </div>
+                <div class="mt-auto card-footer">
+                    <span class="float-start">Mar 8, 2025</span>
+                    <a href="/blogs/fortinet-ztna-part4/" class="float-end btn btn-outline-info btn-sm">Read</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-lg-4 col-md-6 pt-2">
+            <div class="card h-100">
+                
+                <div class="card-header">
+                    <a href="/blogs/fortinet-ztna-part3/">
+                        <img src="/images/fortinet/ztnap.png" class="card-img-top" alt="Fortinet ZTNA Part III">
+                    </a>
+                </div>
+                
+                <div class="card-body bg-transparent p-3 shadow-sm">
+                    <a href="/blogs/fortinet-ztna-part3/" class="primary-font card-title">
+                        <h5 class="card-title bg-transparent" title="Fortinet ZTNA Part III">Fortinet ZTNA Part III</h5>
+                    </a>
+                    <div class="card-text secondary-font">
+                        <p>In this third installment of our Fortinet ZTNA series, we explore integrating SAML authentication with Microsoft Azure as the Identity Provider (IdP) and FortiGate as the Service Provider (SP). By leveraging SAML, authentication is offloaded from the access proxy to the IdP, allowing organizations …</p>
+                    </div>
+                </div>
+                <div class="mt-auto card-footer">
+                    <span class="float-start">Mar 7, 2025</span>
+                    <a href="/blogs/fortinet-ztna-part3/" class="float-end btn btn-outline-info btn-sm">Read</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-lg-4 col-md-6 pt-2">
+            <div class="card h-100">
+                
+                <div class="card-header">
+                    <a href="/blogs/fortinet-ztna-part2/">
+                        <img src="/images/fortinet/ztnap.png" class="card-img-top" alt="Fortinet ZTNA Part II">
+                    </a>
+                </div>
+                
+                <div class="card-body bg-transparent p-3 shadow-sm">
+                    <a href="/blogs/fortinet-ztna-part2/" class="primary-font card-title">
+                        <h5 class="card-title bg-transparent" title="Fortinet ZTNA Part II">Fortinet ZTNA Part II</h5>
+                    </a>
+                    <div class="card-text secondary-font">
+                        <p>In the second part of our Fortinet ZTNA series, we explore a practical use case involving remote access to basic on-premises data center resources.
+The following high-level diagram illustrates the setup:
+This scenario involves the need for remote access to four servers within the data center, each …</p>
+                    </div>
+                </div>
+                <div class="mt-auto card-footer">
+                    <span class="float-start">Mar 6, 2025</span>
+                    <a href="/blogs/fortinet-ztna-part2/" class="float-end btn btn-outline-info btn-sm">Read</a>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</div>
+
+<div class="text-center pt-2">
+    
+    <span class="px-1">
+        <a href="https://github.com/Abed1985/" aria-label="github">
+            <svg xmlns="http://www.w3.org/2000/svg" width="2.7em" height="2.7em" viewBox="0 0 1792 1792">
+                <path id="footer-socialNetworks-github-svg-path"
+                    d="M522 1352q-8 9-20-3-13-11-4-19 8-9 20 3 12 11 4 19zm-42-61q9 12 0 19-8 6-17-7t0-18q9-7 17 6zm-61-60q-5 7-13 2-10-5-7-12 3-5 13-2 10 5 7 12zm31 34q-6 7-16-3-9-11-2-16 6-6 16 3 9 11 2 16zm129 112q-4 12-19 6-17-4-13-15t19-7q16 5 13 16zm63 5q0 11-16 11-17 2-17-11 0-11 16-11 17-2 17 11zm58-10q2 10-14 14t-18-8 14-15q16-2 18 9zm964-956v960q0 119-84.5 203.5t-203.5 84.5h-224q-16 0-24.5-1t-19.5-5-16-14.5-5-27.5v-239q0-97-52-142 57-6 102.5-18t94-39 81-66.5 53-105 20.5-150.5q0-121-79-206 37-91-8-204-28-9-81 11t-92 44l-38 24q-93-26-192-26t-192 26q-16-11-42.5-27t-83.5-38.5-86-13.5q-44 113-7 204-79 85-79 206 0 85 20.5 150t52.5 105 80.5 67 94 39 102.5 18q-40 36-49 103-21 10-45 15t-57 5-65.5-21.5-55.5-62.5q-19-32-48.5-52t-49.5-24l-20-3q-21 0-29 4.5t-5 11.5 9 14 13 12l7 5q22 10 43.5 38t31.5 51l10 23q13 38 44 61.5t67 30 69.5 7 55.5-3.5l23-4q0 38 .5 103t.5 68q0 22-11 33.5t-22 13-33 1.5h-224q-119 0-203.5-84.5t-84.5-203.5v-960q0-119 84.5-203.5t203.5-84.5h960q119 0 203.5 84.5t84.5 203.5z" />
+
+                <metadata>
+                    <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                        xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:dc="http://purl.org/dc/elements/1.1/">
+                        <rdf:Description about="https://iconscout.com/legal#licenses"
+                            dc:title="Github, Online, Project, Hosting, Square"
+                            dc:description="Github, Online, Project, Hosting, Square" dc:publisher="Iconscout"
+                            dc:date="2016-12-14" dc:format="image/svg+xml" dc:language="en">
+                            <dc:creator>
+                                <rdf:Bag>
+                                    <rdf:li>Font Awesome</rdf:li>
+                                </rdf:Bag>
+                            </dc:creator>
+                        </rdf:Description>
+                    </rdf:RDF>
+                </metadata>
+            </svg>
+        </a>
+    </span>
+    
+
+    
+    <span class="px-1">
+        <a href="https://www.linkedin.com/in/aboodalakhras/" aria-label="linkedin">
+            <svg xmlns="http://www.w3.org/2000/svg" width='2.4em' height='2.4em' fill="#fff" aria-label="LinkedIn"
+                viewBox="0 0 512 512">
+                <rect width="512" height="512" fill="#0077b5" rx="15%" />
+                <circle cx="142" cy="138" r="37" />
+                <path stroke="#fff" stroke-width="66" d="M244 194v198M142 194v198" />
+                <path d="M276 282c0-20 13-40 36-40 24 0 33 18 33 45v105h66V279c0-61-32-89-76-89-34 0-51 19-59 32" />
+            </svg>
+        </a>
+    </span>
+    
+
+    
+
+    
+
+    
+</div><div class="container py-4">
+    <div class="row justify-content-center">
+        <div class="col-md-4 text-center">
+            
+                <div class="pb-2">
+                    <a href="https://abed1985.github.io/" title="NetSecOps Navigator">
+                        <img alt="Footer logo" src="/netsecnavigator_favicon_32x32.png"
+                            height="40px" width="40px">
+                    </a>
+                </div>
+            
+            &copy; 2025  All rights reserved
+            <div class="text-secondary">
+                Made with
+                <span class="text-danger">
+                    &#10084;
+                </span>
+                and
+                <a href="https://github.com/gurusabarish/hugo-profile" target="_blank"
+                    title="Designed and developed by gurusabarish">
+                    Hugo Profile
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+</footer><script src="/bootstrap-5/js/bootstrap.bundle.min.js"></script>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl)
+    })
+
+</script>
+
+
+    <script src="/js/search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+  <section id="search-content" class="py-2">
+    <div class="container" id="search-results"></div>
+  </section>
+</body>
+
+</html>
